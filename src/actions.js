@@ -24,57 +24,66 @@ export function fetchActivities() {
   };
 }
 
-export function postLog(mood_id, user_id, entry) {
+export function fetchMoods() {
+  return function(dispatch) {
+    fetch(`http://localhost:3000/moods`)
+      .then(res => res.json())
+      .then(moods => {
+        dispatch({ type: "FETCHING_MOODS", payload: moods });
+      });
+  };
+}
+
+export function fetchLogs() {
+  return function(dispatch) {
+    fetch(`http://localhost:3000/logs`)
+      .then(res => res.json())
+      .then(logs => {
+        dispatch({ type: "FETCHING_LOGS", payload: logs });
+      });
+  };
+}
+
+export function postLog(user_id, date, entry, mood_id, activities) {
   return function(dispatch) {
     fetch(`http://localhost:3000/logs`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
+        user_id: user_id,
+        date: date,
+        entry: entry,
         mood_id: mood_id,
-        user_id: user_id,
-        entry: entry
-      })
-    })
-      .then(res => res.json())
-      .then(log => {
-        //console.log(log);
-        dispatch({ type: "CREATE_LOG", payload: log });
-      });
-  };
-}
-
-export function updateLog(currentLog, user_id, entry) {
-  return function(dispatch) {
-    fetch(`http://localhost:3000/logs/${currentLog.id}`, {
-      method: "PATCH",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        user_id: user_id,
-        entry: entry
-      })
-    })
-      .then(res => res.json())
-      .then(log => {
-        //console.log(log);
-        dispatch({ type: "", payload: log });
-      });
-  };
-}
-
-export function updateActivities(currentLog, activities) {
-  console.log("patching activity to backend");
-  return function(dispatch) {
-    fetch(`http://localhost:3000/logs/${currentLog.id}/add_activities`, {
-      method: "PATCH",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
         activities: activities
       })
     })
       .then(res => res.json())
       .then(log => {
-        //console.log(log);
-        dispatch({ type: "", payload: log });
+        dispatch({ type: "CREATE_LOG", payload: log });
       });
+  };
+}
+//
+// export function fetchLogActivities(log_id, activities) {
+//   return function(dispatch) {
+//     fetch(`http://localhost:3000/logs/`, {
+//       method: "GET",
+//       headers: { "Content-Type": "application/json" },
+//       body: JSON.stringify({
+//         log_id: log_id,
+//         activities: activities
+//       })
+//     })
+//       .then(res => res.json())
+//       .then(log => {
+//         dispatch({ type: "FETCH_LOG_ACTIVITIES", payload: log });
+//       });
+//   };
+// }
+
+export function selectLog(log) {
+  return {
+    type: "SELECT_LOG",
+    payload: log
   };
 }

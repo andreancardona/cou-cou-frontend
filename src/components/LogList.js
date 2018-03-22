@@ -1,11 +1,10 @@
 import React from "react";
 import { connect } from "react-redux";
+import { Button } from "react-bootstrap";
+import { selectLog } from "../actions";
 
 class LogList extends React.Component {
   newEntryClick = event => {
-    this.props.history.push("/logs/new");
-  };
-  logClick = event => {
     this.props.history.push("/logs/new");
   };
   render() {
@@ -23,13 +22,24 @@ class LogList extends React.Component {
             alt="image1"
           />
         </div>
-        {this.props.allLogs.map(log => {
-          return <li onClick={this.logClick}>{log.entry}</li>;
+        {this.props.allLogs.map(eachLog => {
+          return (
+            <div>
+              <ul
+                key={eachLog.id}
+                onClick={event => this.props.selectLog(eachLog)}
+              >
+                <li>{eachLog.date}</li>
+              </ul>
+            </div>
+          );
         })}
-        <div> </div>
-        <button onClick={this.newEntryClick}>make a new entry</button>
+        <div />
+        <Button bsStyle="primary" onClick={this.newEntryClick}>
+          make a new entry
+        </Button>
       </div>
     );
   }
 }
-export default connect(null)(LogList);
+export default connect(null, { selectLog })(LogList);

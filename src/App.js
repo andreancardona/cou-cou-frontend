@@ -3,35 +3,61 @@ import "./App.css";
 import CouCouContainer from "./components/CouCouContainer";
 import LogList from "./components/LogList";
 import { connect } from "react-redux";
-import { fetchUsers, fetchActivities } from "./actions";
+import {
+  fetchUsers,
+  fetchActivities,
+  fetchMoods,
+  fetchLogs
+  //fetchLogActivities
+} from "./actions";
 import { withRouter, Route, Switch } from "react-router-dom";
-
+import LogProfile from "./components/LogProfile";
+import { button } from "react-bootstrap";
+import Chart from "./components/Chart";
 class App extends Component {
   state = {
     users: [],
     activities: [],
-    logEntries: [],
-    currentLog: {}
+    moods: [],
+    logs: [],
+    currentLog: {},
+    selectedLog: {}
   };
 
-  fetchLogEntries = () => {
-    fetch(`http://localhost:3000/logs`)
-      .then(res => res.json())
-      .then(entries => {
-        //console.log(entries);
-        this.setState({
-          logEntries: entries
-        });
-      });
+  logClick = log => {
+    this.props.history.push("/logs");
+    this.setState({
+      selectedLog: log
+    });
   };
 
   componentDidMount() {
-    this.fetchLogEntries();
+    this.props.fetchLogs();
     this.props.fetchUsers();
     this.props.fetchActivities();
+    this.props.fetchMoods();
+    //this.props.fetchLogActivities();
+  }
+
+  renderProfile() {
+    if (this.props.selectedLog) {
+      let feeling = this.props.moods.find(mood => {
+        return mood.id === this.props.selectedLog.mood_id;
+      });
+      if (feeling) {
+        return (
+          <LogProfile feeling={feeling} selectedLog={this.props.selectedLog} />
+        );
+      } else {
+        return null;
+      }
+    } else {
+      return null;
+    }
   }
 
   render() {
+    console.log(this.props.logs);
     return (
       <div className="App">
         <Switch>
@@ -41,10 +67,8 @@ class App extends Component {
             render={props => (
               <CouCouContainer
                 {...props}
-                logEntries={this.state.logEntries}
                 activities={this.props.activities}
                 users={this.state.users}
-                currentLog={this.props.currentLog}
               />
             )}
           />
@@ -52,7 +76,16 @@ class App extends Component {
             exact
             path="/logs"
             render={props => (
-              <LogList {...props} allLogs={this.state.logEntries} />
+              <div>
+                <LogList
+                  {...props}
+                  allLogs={this.props.logs}
+                  logClick={this.logClick}
+                />
+                <p />
+                {this.renderProfile()}
+                <Chart moods={this.props.moods} logs={this.props.logs} />
+              </div>
             )}
           />
         </Switch>
@@ -65,14 +98,20 @@ const mapStateToProps = state => {
   return {
     activities: state.activities,
     users: state.users,
-    logEntries: state.logEntries,
-    currentLog: state.currentLog
+    moods: state.moods,
+    logs: state.logs,
+    currentLog: state.currentLog,
+    selectedLog: state.selectedLog,
+    log_activities: state.log_activities
   };
 };
 
 export default withRouter(
   connect(mapStateToProps, {
     fetchUsers,
-    fetchActivities
+    fetchActivities,
+    fetchMoods,
+    fetchLogs
+    //fetchLogActivities
   })(App)
 );

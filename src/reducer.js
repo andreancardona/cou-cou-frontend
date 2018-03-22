@@ -1,8 +1,11 @@
 const defaultState = {
   users: [],
-  logEntries: [],
+  logs: [],
   currentLog: {},
-  activities: []
+  activities: [],
+  selectedLog: {},
+  log_activities: [],
+  moods: []
 };
 export function rootReducer(state = defaultState, action) {
   switch (action.type) {
@@ -12,9 +15,20 @@ export function rootReducer(state = defaultState, action) {
     case "FETCHING_ACTIVITIES":
       console.log("fetching activities");
       return { ...state, activities: [...state.activities, action.payload] };
+    case "FETCHING_MOODS":
+      console.log("fetching moods");
+      return { ...state, moods: action.payload };
+    case "FETCHING_LOGS":
+      console.log("fetching logs");
+      return { ...state, logs: action.payload };
     case "CREATE_LOG":
-      console.log("creating log");
       return { ...state, currentLog: action.payload };
+    case "SELECT_LOG":
+      console.log("select log");
+      return { ...state, selectedLog: action.payload };
+    case "FETCH_LOG_ACTIVITIES":
+      console.log("log acitivites");
+      return { ...state, log_activities: action.payload };
     default:
       return state;
   }
