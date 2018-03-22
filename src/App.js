@@ -13,7 +13,8 @@ import {
 import { withRouter, Route, Switch } from "react-router-dom";
 import LogProfile from "./components/LogProfile";
 import { button } from "react-bootstrap";
-import Chart from "./components/Chart";
+import BarGraph from "./components/BarGraph";
+import PieChart from "./components/PieChart";
 class App extends Component {
   state = {
     users: [],
@@ -57,7 +58,6 @@ class App extends Component {
   }
 
   render() {
-    console.log(this.props.logs);
     return (
       <div className="App">
         <Switch>
@@ -79,12 +79,13 @@ class App extends Component {
               <div>
                 <LogList
                   {...props}
-                  allLogs={this.props.logs}
+                  logs={this.props.logs}
                   logClick={this.logClick}
                 />
                 <p />
                 {this.renderProfile()}
-                <Chart moods={this.props.moods} logs={this.props.logs} />
+                <BarGraph moods={this.props.moods} logs={this.props.logs} />
+                <PieChart moods={this.props.moods} logs={this.props.logs} />
               </div>
             )}
           />

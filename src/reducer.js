@@ -22,7 +22,11 @@ export function rootReducer(state = defaultState, action) {
       console.log("fetching logs");
       return { ...state, logs: action.payload };
     case "CREATE_LOG":
-      return { ...state, currentLog: action.payload };
+      return {
+        ...state,
+        currentLog: action.payload,
+        logs: [...state.logs, action.payload]
+      };
     case "SELECT_LOG":
       console.log("select log");
       return { ...state, selectedLog: action.payload };

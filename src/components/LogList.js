@@ -22,7 +22,7 @@ class LogList extends React.Component {
             alt="image1"
           />
         </div>
-        {this.props.allLogs.map(eachLog => {
+        {this.props.logs.map(eachLog => {
           return (
             <div>
               <ul
