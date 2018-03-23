@@ -6,8 +6,9 @@ class LogProfile extends React.Component {
     console.log(this.props);
     return (
       <div>
-        <h4>Log:</h4>
-        <p>Date: {this.props.selectedLog.date}</p>
+        <p>
+          <h4>Date:</h4> {this.props.selectedLog.date}
+        </p>
         <p>Entry: {this.props.selectedLog.entry}</p>
         <h4>Mood of the day:</h4>
         <ul>

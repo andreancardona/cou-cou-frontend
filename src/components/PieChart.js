@@ -5,13 +5,16 @@ import { Doughnut } from "react-chartjs-2";
 class PieChart extends React.Component {
   state = {};
 
-  getBarGraphData() {
-    let log = this.props.logs.map(log => {
+  pieChartData() {
+    let logs = this.props.logs.map(log => {
       return log;
     });
     let activitiesArray = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-    log.forEach(logActivity => {
-      activitiesArray[logActivity.id - 1] += 1;
+    console.log("var", logs);
+    logs.forEach(log => {
+      log.activities.forEach(activity => {
+        activitiesArray[activity.id - 1] += 1;
+      });
     });
     return {
       labels: [
@@ -19,7 +22,6 @@ class PieChart extends React.Component {
         "school",
         "homework",
         "gym",
-        "on cloud nine",
         "date",
         "cook",
         "chores",
@@ -53,7 +55,7 @@ class PieChart extends React.Component {
     return (
       <div className="PieChart">
         <Doughnut
-          data={this.getBarGraphData()}
+          data={this.pieChartData()}
           width={100}
           height={200}
           options={{
