@@ -3,3 +3,69 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+
+.welcome-container {
+  background-color: rgb(255, 102, 102);
+}
+
+.welcome-header {
+  color: rgb(255, 255, 255);
+  padding-top: 20px !important;
+  font-family: "Voltaire", sans-serif !important;
+  font-size: 30px !important;
+}
+.button-submit {
+  background: #ffffff;
+  background: -webkit-linear-gradient(#ffffff, #ffffff);
+  background: linear-gradient(#ffffff, #ffffff);
+  border-radius: 5px;
+  padding: 8px 20px;
+  color: #e36a6a;
+  display: inline-block;
+  font: normal 400 18px/1 "Zenhei", sans-serif;
+  text-align: center;
+  text-shadow: none;
+  margin-bottom: 20px;
+}
+.datePicker {
+  background-color: rgb(255, 255, 255);
+  padding-top: 20px !important;
+  padding-bottom: 20px !important;
+}
+
+.text-form {
+  font: 0.9em/1.5em "handwriting", sans-serif;
+
+  border: none;
+  padding: 0 10px;
+  margin: 0;
+  width: 240px;
+  height: 300px;
+
+  background: none;
+  background: rgb(255, 255, 255);
+  border-radius: 5px;
+  outline: none;
+}
+
+.log-list-container {
+  background-color: rgb(255, 102, 102);
+}
+
+.log-list-header {
+  color: rgb(255, 255, 255);
+  padding-top: 20px !important;
+  font-family: "Voltaire", sans-serif !important;
+  font-size: 30px !important;
+}
+.clickable-images {
+  margin: 10px;
+}
+.profile-image {
+  margin-right: 300px;
+}
+.log-list {
+  margin: 10px;
+  color: rgb(255, 255, 255);
+  list-style-type: none;
+}

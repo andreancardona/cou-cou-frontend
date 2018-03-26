@@ -1,20 +1,17 @@
 import React, { Component } from "react";
 import "./App.css";
+import { connect } from "react-redux";
+import { fetchUsers, fetchActivities, fetchMoods, fetchLogs } from "./actions";
+import { withRouter, Route, Switch } from "react-router-dom";
+import { button } from "react-bootstrap";
 import CouCouContainer from "./components/CouCouContainer";
 import LogList from "./components/LogList";
-import { connect } from "react-redux";
-import {
-  fetchUsers,
-  fetchActivities,
-  fetchMoods,
-  fetchLogs
-  //fetchLogActivities
-} from "./actions";
-import { withRouter, Route, Switch } from "react-router-dom";
 import LogProfile from "./components/LogProfile";
-import { button } from "react-bootstrap";
 import BarGraph from "./components/BarGraph";
 import PieChart from "./components/PieChart";
+//import DateContainer from "./components/DateContainer";
+//import ActivitiesContainer from "./components/ActivitiesContainer";
+
 class App extends Component {
   state = {
     users: [],
@@ -37,7 +34,6 @@ class App extends Component {
     this.props.fetchUsers();
     this.props.fetchActivities();
     this.props.fetchMoods();
-    //this.props.fetchLogActivities();
   }
 
   renderProfile() {
@@ -59,19 +55,22 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
+      <div className="App-container">
         <Switch>
           <Route
             exact
             path="/logs/new"
             render={props => (
-              <CouCouContainer
-                {...props}
-                activities={this.props.activities}
-                users={this.state.users}
-              />
+              <div>
+                <CouCouContainer
+                  {...props}
+                  activities={this.props.activities}
+                  users={this.state.users}
+                />
+              </div>
             )}
           />
+
           <Route
             exact
             path="/logs"
@@ -113,6 +112,5 @@ export default withRouter(
     fetchActivities,
     fetchMoods,
     fetchLogs
-    //fetchLogActivities
   })(App)
 );

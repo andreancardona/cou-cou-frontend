@@ -10,7 +10,6 @@ class PieChart extends React.Component {
       return log;
     });
     let activitiesArray = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-    console.log("var", logs);
     logs.forEach(log => {
       log.activities.forEach(activity => {
         activitiesArray[activity.id - 1] += 1;
@@ -51,7 +50,6 @@ class PieChart extends React.Component {
   }
 
   render() {
-    console.log(this.props.logs);
     return (
       <div className="PieChart">
         <Doughnut

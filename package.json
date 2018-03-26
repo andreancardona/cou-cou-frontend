@@ -3,18 +3,21 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "bootstrap": "^4.0.0",
     "BarGraph.js": "^2.7.2",
+    "bootstrap": "^4.0.0",
+    "chart.js": "^2.7.2",
     "react": "^16.2.0",
-    "react-bootstrap": "^0.32.1",
     "react-BarGraphjs-2": "^2.7.0",
+    "react-bootstrap": "^0.32.1",
+    "react-chartjs-2": "^2.7.0",
     "react-date-picker": "^6.9.1",
     "react-dom": "^16.2.0",
     "react-redux": "^5.0.7",
     "react-router-dom": "^4.2.2",
     "react-scripts": "1.1.1",
     "redux": "^3.7.2",
-    "redux-thunk": "^2.2.0"
+    "redux-thunk": "^2.2.0",
+    "startbootstrap-one-page-wonder": "^4.0.0"
   },
   "scripts": {
     "start": "react-scripts start",

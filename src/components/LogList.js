@@ -9,16 +9,17 @@ class LogList extends React.Component {
   };
   render() {
     return (
-      <div>
+      <div className="log-list-container">
         <div>
           {" "}
-          <h2> Your Diary Entries: </h2>
+          <h2 className="log-list-header"> Your Diary Entries: </h2>
         </div>
         <div>
           <img
+            className="profile-image"
             height="100"
             width="100"
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0x8PZGznwOgJzTYQWLdgi3UFmcxuKrMIehWjcfcTIhFeBxIMiAA"
+            src="https://avataaars.io/?avatarStyle=Circle&topType=LongHairStraight&accessoriesType=Round&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=PastelBlue&eyeType=Default&eyebrowType=Default&mouthType=Default&skinColor=Light"
             alt="image1"
           />
         </div>
@@ -26,6 +27,8 @@ class LogList extends React.Component {
           return (
             <div>
               <ul
+                id="otis"
+                className="log-list"
                 key={eachLog.id}
                 onClick={event => this.props.selectLog(eachLog)}
               >
@@ -35,9 +38,9 @@ class LogList extends React.Component {
           );
         })}
         <div />
-        <Button bsStyle="primary" onClick={this.newEntryClick}>
+        <button className="button-submit" onClick={this.newEntryClick}>
           make a new entry
-        </Button>
+        </button>
       </div>
     );
   }

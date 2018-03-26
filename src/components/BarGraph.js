@@ -21,7 +21,7 @@ class BarGraph extends React.Component {
       datasets: [
         {
           label: "Weekly Mood Tracker",
-          data: moodsArray, // each number is one occurence
+          data: moodsArray,
           backgroundColor: [
             "rgba(225,99,132,0.6)",
             "rgba(225,206,86,0.6)",

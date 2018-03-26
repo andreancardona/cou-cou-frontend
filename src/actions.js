@@ -63,23 +63,6 @@ export function postLog(user_id, date, entry, mood_id, activities) {
       });
   };
 }
-//
-// export function fetchLogActivities(log_id, activities) {
-//   return function(dispatch) {
-//     fetch(`http://localhost:3000/logs/`, {
-//       method: "GET",
-//       headers: { "Content-Type": "application/json" },
-//       body: JSON.stringify({
-//         log_id: log_id,
-//         activities: activities
-//       })
-//     })
-//       .then(res => res.json())
-//       .then(log => {
-//         dispatch({ type: "FETCH_LOG_ACTIVITIES", payload: log });
-//       });
-//   };
-// }
 
 export function selectLog(log) {
   return {
