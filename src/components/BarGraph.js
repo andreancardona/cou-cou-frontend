@@ -23,11 +23,11 @@ class BarGraph extends React.Component {
           label: "Weekly Mood Tracker",
           data: moodsArray,
           backgroundColor: [
-            "rgba(225,99,132,0.6)",
-            "rgba(225,206,86,0.6)",
-            "rgba(75,192,192,0.6)",
-            "rgba(153,102,255,0.6)",
-            "rgba(225,99,132,0.6)"
+            "rgba(255, 102, 102)",
+            "rgba(230, 230, 0)",
+            "rgba(0, 179, 0)",
+            "rgba(51, 255, 51)",
+            "rgba(204, 102, 255)"
           ]
         }
       ]
