@@ -4,37 +4,25 @@ import { postLog } from "../actions";
 import { Button } from "react-bootstrap";
 
 class TextContainer extends React.Component {
-  state = {
-    date: new Date(),
-    mood_id: "",
-    text: "",
-    entry_submit: "",
-    activities: []
-  };
-
-  handleChange = event => {
-    event.preventDefault();
-    this.setState({
-      text: event.target.value
-    });
-  };
-  handleEntrySubmit = event => {
-    event.preventDefault();
-    this.setState({
-      entry_submit: this.state.text
-    });
-    this.props.history.push("/logs/activities/new");
-  };
   render() {
+    console.log("text props", this.props);
+    if (this.props.current_container !== "text") {
+      return <div />;
+    }
     return (
       <div>
-        <h2>What is on your mind?</h2>
-        <div>
-          <form onSubmit={this.handleEntrySubmit}>
-            <textarea type="text" onChange={this.handleChange} />
-            <input type="submit" value="Submit" />
-          </form>
-        </div>
+        <p />
+        <h2 className="welcome-header">What ya thinking about?</h2>
+
+        <form onSubmit={this.props.handleEntrySubmit}>
+          <textarea
+            className="text-form"
+            type="text"
+            onChange={this.props.handleChange}
+          />
+          <p />
+          <input className="button-submit" type="submit" value="submit" />
+        </form>
         <p />
       </div>
     );

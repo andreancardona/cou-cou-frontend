@@ -9,9 +9,9 @@ class LogProfile extends React.Component {
         <p>
           <h4>Date:</h4> {this.props.selectedLog.date}
         </p>
-        <p>Entry: {this.props.selectedLog.entry}</p>
+        <h4>Entry:</h4> {this.props.selectedLog.entry}
         <h4>Mood of the day:</h4>
-        <ul>
+        <ul className="log-list">
           {" "}
           <li>
             {" "}
@@ -28,7 +28,7 @@ class LogProfile extends React.Component {
         <h4>Activities:</h4>
         {this.props.selectedLog.activities.map(activity => {
           return (
-            <ul>
+            <ul className="log-list">
               {" "}
               <li>
                 {" "}

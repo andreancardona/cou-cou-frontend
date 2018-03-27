@@ -27,7 +27,6 @@ class LogList extends React.Component {
           return (
             <div>
               <ul
-                id="otis"
                 className="log-list"
                 key={eachLog.id}
                 onClick={event => this.props.selectLog(eachLog)}

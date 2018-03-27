@@ -2,41 +2,12 @@ import React from "react";
 import { connect } from "react-redux";
 import { postLog } from "../actions";
 import { Button } from "react-bootstrap";
+
 class MoodContainer extends React.Component {
-  cryingClick = event => {
-    console.log("crying");
-    event.preventDefault();
-    this.setState({
-      mood_id: parseInt(event.target.id)
-    });
-  };
-
-  sadClick = event => {
-    console.log("sad");
-    this.setState({
-      mood_id: parseInt(event.target.id)
-    });
-  };
-  neutralClick = event => {
-    console.log("neutral");
-    this.setState({
-      mood_id: parseInt(event.target.id)
-    });
-  };
-  happyClick = event => {
-    console.log("happy");
-    this.setState({
-      mood_id: parseInt(event.target.id)
-    });
-  };
-  ecstaticClick = event => {
-    console.log("ecstatic");
-    this.setState({
-      mood_id: parseInt(event.target.id)
-    });
-  };
-
   render() {
+    if (this.props.current_container !== "mood") {
+      return <div />;
+    }
     return (
       <div>
         <h2 className="welcome-header">How are you feeling today? </h2>
@@ -46,7 +17,7 @@ class MoodContainer extends React.Component {
               height="50"
               width="50"
               src="https://emojipedia-us.s3.amazonaws.com/thumbs/120/apple/118/loudly-crying-face_1f62d.png"
-              onClick={this.cryingClick}
+              onClick={this.props.setMood}
               alt="image1"
               id="1"
             />
@@ -57,7 +28,7 @@ class MoodContainer extends React.Component {
               height="50"
               width="50"
               src="https://emojipedia-us.s3.amazonaws.com/thumbs/120/apple/118/disappointed-face_1f61e.png"
-              onClick={this.sadClick}
+              onClick={this.props.setMood}
               alt="image2"
               id="2"
             />
@@ -68,7 +39,7 @@ class MoodContainer extends React.Component {
               height="50"
               width="50"
               src="https://emojipedia-us.s3.amazonaws.com/thumbs/120/apple/118/neutral-face_1f610.png"
-              onClick={this.neutralClick}
+              onClick={this.props.setMood}
               alt="image3"
               id="3"
             />
@@ -79,7 +50,7 @@ class MoodContainer extends React.Component {
               height="50"
               width="50"
               src="https://emojipedia-us.s3.amazonaws.com/thumbs/120/apple/118/grinning-face_1f600.png"
-              onClick={this.happyClick}
+              onClick={this.props.setMood}
               alt="image4"
               id="4"
             />
@@ -90,7 +61,7 @@ class MoodContainer extends React.Component {
               height="50"
               width="50"
               src="https://emojipedia-us.s3.amazonaws.com/thumbs/120/apple/118/upside-down-face_1f643.png"
-              onClick={this.ecstaticClick}
+              onClick={this.props.setMood}
               alt="image5"
               id="5"
             />

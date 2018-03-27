@@ -4,6 +4,10 @@ import { postLog } from "../actions";
 import { Button } from "react-bootstrap";
 import DatePicker from "react-date-picker";
 import MoodContainer from "./MoodContainer";
+import TextContainer from "./TextContainer";
+import ActivitiesContainer from "./ActivitiesContainer";
+
+import { withRouter, Route, Switch } from "react-router-dom";
 
 class CouCouContainer extends React.Component {
   state = {
@@ -11,46 +15,23 @@ class CouCouContainer extends React.Component {
     mood_id: "",
     text: "",
     entry_submit: "",
-    activities: []
+    activities: [],
+    current_container: "date"
   };
 
   onChange = date => {
     console.log("date clicked", date);
     this.setState({
-      date
+      date,
+      current_container: "mood"
     });
   };
 
-  cryingClick = event => {
-    console.log("crying");
-    event.preventDefault();
+  setMood = event => {
+    console.log(event.target.id);
     this.setState({
-      mood_id: parseInt(event.target.id)
-    });
-  };
-
-  sadClick = event => {
-    console.log("sad");
-    this.setState({
-      mood_id: parseInt(event.target.id)
-    });
-  };
-  neutralClick = event => {
-    console.log("neutral");
-    this.setState({
-      mood_id: parseInt(event.target.id)
-    });
-  };
-  happyClick = event => {
-    console.log("happy");
-    this.setState({
-      mood_id: parseInt(event.target.id)
-    });
-  };
-  ecstaticClick = event => {
-    console.log("ecstatic");
-    this.setState({
-      mood_id: parseInt(event.target.id)
+      mood_id: event.target.id,
+      current_container: "text"
     });
   };
 
@@ -65,12 +46,12 @@ class CouCouContainer extends React.Component {
     event.preventDefault();
     this.setState(
       {
-        entry_submit: this.state.text
+        entry_submit: this.state.text,
+        current_container: "activities"
       },
       () => console.log(this.state.text)
     );
   };
-
   activitiesClick = event => {
     event.preventDefault();
     this.setState(
@@ -95,6 +76,7 @@ class CouCouContainer extends React.Component {
   };
 
   render() {
+    console.log(this.state);
     return (
       <div className="welcome-container">
         <h2 className="welcome-header">CouCou, Andrea! </h2>
@@ -102,98 +84,22 @@ class CouCouContainer extends React.Component {
           <DatePicker onChange={this.onChange} value={this.state.date} />
         </div>
         <p />
-        <h2 className="welcome-header">How are you feeling today? </h2>
 
-        <div>
-          <Button className="clickable-images" bsStyle="sucess">
-            <img
-              height="50"
-              width="50"
-              src="https://emojipedia-us.s3.amazonaws.com/thumbs/120/apple/118/loudly-crying-face_1f62d.png"
-              onClick={this.cryingClick}
-              alt="image1"
-              id="1"
-            />
-          </Button>
+        <MoodContainer
+          setMood={this.setMood}
+          current_container={this.state.current_container}
+        />
+        <TextContainer
+          handleChange={this.handleChange}
+          handleEntrySubmit={this.handleEntrySubmit}
+          current_container={this.state.current_container}
+        />
 
-          <Button className="clickable-images" bsStyle="sucess">
-            <img
-              height="50"
-              width="50"
-              src="https://emojipedia-us.s3.amazonaws.com/thumbs/120/apple/118/disappointed-face_1f61e.png"
-              onClick={this.sadClick}
-              alt="image2"
-              id="2"
-            />
-          </Button>
-
-          <Button className="clickable-images" bsStyle="sucess">
-            <img
-              height="50"
-              width="50"
-              src="https://emojipedia-us.s3.amazonaws.com/thumbs/120/apple/118/neutral-face_1f610.png"
-              onClick={this.neutralClick}
-              alt="image3"
-              id="3"
-            />
-          </Button>
-
-          <Button className="clickable-images" bsStyle="sucess">
-            <img
-              height="50"
-              width="50"
-              src="https://emojipedia-us.s3.amazonaws.com/thumbs/120/apple/118/grinning-face_1f600.png"
-              onClick={this.happyClick}
-              alt="image4"
-              id="4"
-            />
-          </Button>
-
-          <Button className="clickable-images" bsStyle="sucess">
-            <img
-              height="50"
-              width="50"
-              src="https://emojipedia-us.s3.amazonaws.com/thumbs/120/apple/118/upside-down-face_1f643.png"
-              onClick={this.ecstaticClick}
-              alt="image5"
-              id="5"
-            />
-          </Button>
-        </div>
-        <p />
-        <h2 className="welcome-header">What ya thinking about?</h2>
-
-        <form onSubmit={this.handleEntrySubmit}>
-          <textarea
-            className="text-form"
-            type="text"
-            onChange={this.handleChange}
-          />
-          <p />
-          <input className="button-submit" type="submit" value="submit" />
-        </form>
-        <p />
-
-        {this.props.activities.map(activity => {
-          return activity.map(singleActivity => {
-            return (
-              <Button className="clickable-images" bsStyle="sucess">
-                <img
-                  height="50"
-                  width="50"
-                  src={singleActivity.url}
-                  alt={singleActivity.activity}
-                  id={singleActivity.id}
-                  onClick={this.activitiesClick}
-                />
-              </Button>
-            );
-          });
-        })}
-        <form onSubmit={this.handleActivitiesSubmit}>
-          <p />
-          <input className="button-submit" type="submit" value="submit" />
-        </form>
+        <ActivitiesContainer
+          activitiesClick={this.activitiesClick}
+          handleActivitiesSubmit={this.handleActivitiesSubmit}
+          current_container={this.state.current_container}
+        />
       </div>
     );
   }

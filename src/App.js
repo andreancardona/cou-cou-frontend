@@ -9,7 +9,7 @@ import LogList from "./components/LogList";
 import LogProfile from "./components/LogProfile";
 import BarGraph from "./components/BarGraph";
 import PieChart from "./components/PieChart";
-//import DateContainer from "./components/DateContainer";
+//import MoodContainer from "./components/MoodContainer";
 //import ActivitiesContainer from "./components/ActivitiesContainer";
 
 class App extends Component {
@@ -70,7 +70,6 @@ class App extends Component {
               </div>
             )}
           />
-
           <Route
             exact
             path="/logs"
