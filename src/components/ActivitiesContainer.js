@@ -41,6 +41,7 @@ class ActivitiesContainer extends React.Component {
 }
 
 const mapStateToProps = state => {
+  console.log("activities", state);
   return {
     activities: state.activities
   };

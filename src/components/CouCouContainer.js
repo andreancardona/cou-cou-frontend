@@ -1,12 +1,18 @@
 import React from "react";
 import { connect } from "react-redux";
 import { postLog } from "../actions";
+import {
+  fetchUsers,
+  fetchActivities,
+  fetchMoods,
+  fetchLogs,
+  currentUser
+} from "../actions";
 import { Button } from "react-bootstrap";
 import DatePicker from "react-date-picker";
 import MoodContainer from "./MoodContainer";
 import TextContainer from "./TextContainer";
 import ActivitiesContainer from "./ActivitiesContainer";
-
 import { withRouter, Route, Switch } from "react-router-dom";
 
 class CouCouContainer extends React.Component {
@@ -18,6 +24,14 @@ class CouCouContainer extends React.Component {
     activities: [],
     current_container: "date"
   };
+
+  componentDidMount() {
+    console.log("testing comp did mount");
+    this.props.fetchLogs();
+    this.props.fetchUsers();
+    this.props.fetchActivities();
+    this.props.fetchMoods();
+  }
 
   onChange = date => {
     console.log("date clicked", date);
@@ -76,10 +90,14 @@ class CouCouContainer extends React.Component {
   };
 
   render() {
-    console.log(this.state);
+    console.log(this.props.user);
     return (
-      <div className="welcome-container">
-        <h2 className="welcome-header">CouCou, Andrea! </h2>
+      <div>
+        <div className="welcome-container">
+          <h2 className="welcome-header">
+            CouCou, {this.props.user.name || "Name"}{" "}
+          </h2>
+        </div>
         <div className="datePicker">
           <DatePicker onChange={this.onChange} value={this.state.date} />
         </div>
@@ -105,4 +123,17 @@ class CouCouContainer extends React.Component {
   }
 }
 
-export default connect(null, { postLog })(CouCouContainer);
+const mapStateToProps = state => {
+  console.log(state);
+  return {
+    user: state.user
+  };
+};
+
+export default connect(mapStateToProps, {
+  postLog,
+  fetchUsers,
+  fetchActivities,
+  fetchMoods,
+  fetchLogs
+})(CouCouContainer);

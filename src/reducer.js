@@ -5,7 +5,8 @@ const defaultState = {
   activities: [],
   selectedLog: {},
   log_activities: [],
-  moods: []
+  moods: [],
+  user: {}
 };
 export function rootReducer(state = defaultState, action) {
   switch (action.type) {
@@ -33,6 +34,9 @@ export function rootReducer(state = defaultState, action) {
     case "FETCH_LOG_ACTIVITIES":
       console.log("log acitivites");
       return { ...state, log_activities: action.payload };
+    case "SET_CURRENT_USER":
+      console.log("login", action.payload);
+      return { ...state, user: action.payload.user };
     default:
       return state;
   }

@@ -1,27 +1,23 @@
 import React, { Component } from "react";
 import "./App.css";
 import { connect } from "react-redux";
-import { fetchUsers, fetchActivities, fetchMoods, fetchLogs } from "./actions";
+import {
+  fetchUsers,
+  fetchActivities,
+  fetchMoods,
+  fetchLogs,
+  currentUser
+} from "./actions";
 import { withRouter, Route, Switch } from "react-router-dom";
 import { button } from "react-bootstrap";
+import LoginContainer from "./components/LoginContainer";
 import CouCouContainer from "./components/CouCouContainer";
 import LogList from "./components/LogList";
 import LogProfile from "./components/LogProfile";
 import BarGraph from "./components/BarGraph";
 import PieChart from "./components/PieChart";
-//import MoodContainer from "./components/MoodContainer";
-//import ActivitiesContainer from "./components/ActivitiesContainer";
 
 class App extends Component {
-  state = {
-    users: [],
-    activities: [],
-    moods: [],
-    logs: [],
-    currentLog: {},
-    selectedLog: {}
-  };
-
   logClick = log => {
     this.props.history.push("/logs");
     this.setState({
@@ -30,10 +26,32 @@ class App extends Component {
   };
 
   componentDidMount() {
-    this.props.fetchLogs();
-    this.props.fetchUsers();
-    this.props.fetchActivities();
-    this.props.fetchMoods();
+    if (!this.props.user.id && !localStorage.getItem("jwt")) {
+      console.log("no user and no jot");
+      this.props.history.push("/login");
+    } else if (!this.props.user.id && localStorage.getItem("jwt")) {
+      console.log("no user but WE GOT jot");
+      this.props.currentUser();
+    } else if (this.props.user.id && localStorage.getItem("jwt")) {
+      console.log("WE GOT user and WE GOT jot");
+      this.props.fetchLogs();
+      this.props.fetchUsers();
+      this.props.fetchActivities();
+      this.props.fetchMoods();
+      this.props.history.push("/logs/new");
+    } else {
+      console.log("hit our else");
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    console.log("next props", nextProps);
+    if (
+      !localStorage.getItem("jwt") &&
+      this.props.location.pathname !== "/login"
+    ) {
+      this.props.history.push("/login");
+    }
   }
 
   renderProfile() {
@@ -59,13 +77,22 @@ class App extends Component {
         <Switch>
           <Route
             exact
+            path="/login"
+            render={props => (
+              <div>
+                <LoginContainer {...props} />
+              </div>
+            )}
+          />
+          <Route
+            exact
             path="/logs/new"
             render={props => (
               <div>
                 <CouCouContainer
                   {...props}
                   activities={this.props.activities}
-                  users={this.state.users}
+                  users={this.props.users}
                 />
               </div>
             )}
@@ -101,7 +128,8 @@ const mapStateToProps = state => {
     logs: state.logs,
     currentLog: state.currentLog,
     selectedLog: state.selectedLog,
-    log_activities: state.log_activities
+    log_activities: state.log_activities,
+    user: state.user
   };
 };
 
@@ -110,6 +138,7 @@ export default withRouter(
     fetchUsers,
     fetchActivities,
     fetchMoods,
-    fetchLogs
+    fetchLogs,
+    currentUser
   })(App)
 );
