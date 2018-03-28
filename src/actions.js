@@ -34,9 +34,10 @@ export function fetchMoods() {
   };
 }
 
-export function fetchLogs() {
+export function fetchLogs(id) {
   return function(dispatch) {
-    fetch(`http://localhost:3000/logs`)
+    console.log("fetchLogs id", id);
+    fetch(`http://localhost:3000/users/${id}/logs`)
       .then(res => res.json())
       .then(logs => {
         dispatch({ type: "FETCHING_LOGS", payload: logs });
@@ -93,7 +94,7 @@ export function login(username, password, history) {
 export function currentUser() {
   console.log("curent user");
   return function(dispatch) {
-    fetch(`http://localhost:3000/fetch_current_user`, {
+    return fetch(`http://localhost:3000/fetch_current_user`, {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -108,6 +109,14 @@ export function currentUser() {
         } else {
           dispatch({ type: "SET_CURRENT_USER", payload: json });
         }
+        return json;
       });
+  };
+}
+
+export function logout() {
+  console.log("logout");
+  return {
+    type: "LOGOUT"
   };
 }

@@ -10,6 +10,7 @@ import {
 } from "../actions";
 import { Button } from "react-bootstrap";
 import DatePicker from "react-date-picker";
+//import DateContainer from "./DateContainer";
 import MoodContainer from "./MoodContainer";
 import TextContainer from "./TextContainer";
 import ActivitiesContainer from "./ActivitiesContainer";
@@ -27,7 +28,7 @@ class CouCouContainer extends React.Component {
 
   componentDidMount() {
     console.log("testing comp did mount");
-    this.props.fetchLogs();
+    this.props.fetchLogs(this.props.user.id);
     this.props.fetchUsers();
     this.props.fetchActivities();
     this.props.fetchMoods();
@@ -80,7 +81,7 @@ class CouCouContainer extends React.Component {
     event.preventDefault();
     console.log("YOU DID IT");
     this.props.postLog(
-      1,
+      this.props.user.id,
       this.state.date,
       this.state.entry_submit,
       this.state.mood_id,
@@ -92,17 +93,13 @@ class CouCouContainer extends React.Component {
   render() {
     console.log(this.props.user);
     return (
-      <div>
-        <div className="welcome-container">
-          <h2 className="welcome-header">
-            CouCou, {this.props.user.name || "Name"}{" "}
-          </h2>
-        </div>
+      <div className="welcome-container">
+        <h2 className="welcome-header">
+          CouCou, {this.props.user.name || "Name"}{" "}
+        </h2>
         <div className="datePicker">
           <DatePicker onChange={this.onChange} value={this.state.date} />
         </div>
-        <p />
-
         <MoodContainer
           setMood={this.setMood}
           current_container={this.state.current_container}

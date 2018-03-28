@@ -24,27 +24,34 @@ class Login extends React.Component {
   };
 
   render() {
+    if (localStorage.getItem("jwt")) {
+      return <div />;
+    }
     return (
       <div>
-        <h3>User Login</h3>
-        <form onSubmit={this.handleSubmit}>
-          <label>Username: </label>
-          <input
-            onChange={this.handleChange}
-            name="username"
-            type="text"
-            value={this.state.username}
-          />
-          <label>Password: </label>
-          <input
-            onChange={this.handleChange}
-            type="password"
-            name="password"
-            value={this.state.password}
-          />
-          <input type="submit" />
-          <Button label="Submit" />
-        </form>
+        <div className="welcome-container">
+          <h3 className="welcome-header">Welcome to CouCou!</h3>
+
+          <form onSubmit={this.handleSubmit}>
+            <label className="username">Username: </label>
+            <input
+              onChange={this.handleChange}
+              name="username"
+              type="text"
+              value={this.state.username}
+            />
+            <p />
+            <label className="password">Password: </label>
+            <input
+              onChange={this.handleChange}
+              type="password"
+              name="password"
+              value={this.state.password}
+            />
+            <p />
+            <input className="button-submit" type="submit" />
+          </form>
+        </div>
       </div>
     );
   }

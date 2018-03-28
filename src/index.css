@@ -6,6 +6,7 @@ body {
 
 .welcome-container {
   background-color: rgb(255, 102, 102);
+  padding-bottom: 20px;
 }
 
 .welcome-header {
@@ -13,6 +14,18 @@ body {
   padding-top: 20px !important;
   font-family: "Voltaire", sans-serif !important;
   font-size: 30px !important;
+}
+.username {
+  color: rgb(255, 255, 255);
+  padding-top: 20px !important;
+  font-family: "Voltaire", sans-serif !important;
+  font-size: 20px !important;
+}
+.password {
+  color: rgb(255, 255, 255);
+  padding-top: 20px !important;
+  font-family: "Voltaire", sans-serif !important;
+  font-size: 20px !important;
 }
 .button-submit {
   background: #ffffff;
@@ -62,6 +75,7 @@ body {
   margin: 10px;
 }
 .profile-image {
+  margin-left: 40px;
 }
 .log-list {
   margin: 10px;

@@ -31,10 +31,13 @@ class App extends Component {
       this.props.history.push("/login");
     } else if (!this.props.user.id && localStorage.getItem("jwt")) {
       console.log("no user but WE GOT jot");
-      this.props.currentUser();
+      this.props
+        .currentUser()
+        .then(data => this.props.fetchLogs(data.user.id))
+        .then(data => this.props.fetchMoods());
     } else if (this.props.user.id && localStorage.getItem("jwt")) {
       console.log("WE GOT user and WE GOT jot");
-      this.props.fetchLogs();
+      this.props.fetchLogs(this.props.user.id);
       this.props.fetchUsers();
       this.props.fetchActivities();
       this.props.fetchMoods();
@@ -51,15 +54,23 @@ class App extends Component {
       this.props.location.pathname !== "/login"
     ) {
       this.props.history.push("/login");
+    } else if (
+      localStorage.getItem("jwt") &&
+      this.props.location.pathname === "/login"
+    ) {
+      this.props.history.push("/logs");
     }
   }
 
   renderProfile() {
+    console.log("render log profile,", this.props.selectedLog);
     if (this.props.selectedLog) {
       let feeling = this.props.moods.find(mood => {
         return mood.id === this.props.selectedLog.mood_id;
       });
+      console.log("what is the feeling", feeling, this.props.moods);
       if (feeling) {
+        console.log("showing log profile", feeling);
         return (
           <LogProfile feeling={feeling} selectedLog={this.props.selectedLog} />
         );
@@ -72,6 +83,7 @@ class App extends Component {
   }
 
   render() {
+    console.log("app render", this.props);
     return (
       <div className="App-container">
         <Switch>
@@ -102,11 +114,7 @@ class App extends Component {
             path="/logs"
             render={props => (
               <div>
-                <LogList
-                  {...props}
-                  logs={this.props.logs}
-                  logClick={this.logClick}
-                />
+                <LogList {...props} logClick={this.logClick} />
                 <p />
                 {this.renderProfile()}
                 <BarGraph moods={this.props.moods} logs={this.props.logs} />
@@ -121,6 +129,7 @@ class App extends Component {
 }
 
 const mapStateToProps = state => {
+  console.log("app state,", state);
   return {
     activities: state.activities,
     users: state.users,
