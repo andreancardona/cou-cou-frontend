@@ -10,12 +10,6 @@ class LogList extends React.Component {
       this.props.fetchLogs(this.props.user.id);
     }
   }
-  // componentDidUpdate() {
-  //   console.log("component did update", this.props.user);
-  //   if (this.props.logs.length) {
-  //     this.props.fetchLogs(this.props.user.id);
-  //   }
-  // }
   newEntryClick = event => {
     this.props.history.push("/logs/new");
   };
@@ -34,7 +28,7 @@ class LogList extends React.Component {
       <div className="log-list-container">
         <div>
           {" "}
-          <h2 className="log-list-header"> Your Diary Entries: </h2>
+          <h2 className="log-list-header"> Your Daily Entries: </h2>
         </div>
         <div>
           <img

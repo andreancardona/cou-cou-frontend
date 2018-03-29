@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css?family=Montserrat");
+
 body {
   margin: 0;
   padding: 0;
@@ -5,26 +7,28 @@ body {
 }
 
 .welcome-container {
+  padding-top: 100px;
   background-color: rgb(255, 102, 102);
   padding-bottom: 20px;
+  height: 1000px;
 }
 
 .welcome-header {
   color: rgb(255, 255, 255);
   padding-top: 20px !important;
-  font-family: "Voltaire", sans-serif !important;
-  font-size: 30px !important;
+  font-family: "Montserrat", sans-serif !important;
+  font-size: 40px !important;
 }
 .username {
   color: rgb(255, 255, 255);
   padding-top: 20px !important;
-  font-family: "Voltaire", sans-serif !important;
+  font-family: "Montserrat", sans-serif !important;
   font-size: 20px !important;
 }
 .password {
   color: rgb(255, 255, 255);
   padding-top: 20px !important;
-  font-family: "Voltaire", sans-serif !important;
+  font-family: "Montserrat", sans-serif !important;
   font-size: 20px !important;
 }
 .button-submit {
@@ -35,7 +39,7 @@ body {
   padding: 8px 20px;
   color: #e36a6a;
   display: inline-block;
-  font: normal 400 18px/1 "Zenhei", sans-serif;
+  font-family: "Montserrat", sans-serif !important;
   text-align: center;
   text-shadow: none;
   margin-bottom: 20px;
@@ -68,7 +72,7 @@ body {
 .log-list-header {
   color: rgb(255, 255, 255);
   padding-top: 20px !important;
-  font-family: "Voltaire", sans-serif !important;
+  font-family: "Montserrat", sans-serif !important;
   font-size: 30px !important;
 }
 .clickable-images {
