@@ -54,7 +54,7 @@ class LogList extends React.Component {
           );
         })}
         <div />
-        <button className="button-submit" onClick={this.newEntryClick}>
+        <button className="button-submit-entry" onClick={this.newEntryClick}>
           Make a new entry
         </button>
         <div />

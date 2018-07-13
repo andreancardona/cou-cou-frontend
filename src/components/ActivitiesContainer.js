@@ -31,7 +31,11 @@ class ActivitiesContainer extends React.Component {
         })}
         <form onSubmit={this.props.handleActivitiesSubmit}>
           <p />
-          <input className="button-submit" type="submit" value="submit" />
+          <input
+            className="button-submit-activities"
+            type="submit"
+            value="submit"
+          />{" "}
         </form>
       </div>
     );

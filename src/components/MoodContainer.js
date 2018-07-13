@@ -12,16 +12,21 @@ class MoodContainer extends React.Component {
       <div>
         <h2 className="welcome-header">How are you feeling today? </h2>
         <div>
-          <Button className="clickable-images" bsStyle="sucess">
-            <img
-              height="50"
-              width="50"
-              src="https://emojipedia-us.s3.amazonaws.com/thumbs/120/apple/118/loudly-crying-face_1f62d.png"
-              onClick={this.props.setMood}
-              alt="image1"
-              id="1"
-            />
-          </Button>
+          <div className="hvrbox">
+            <Button className="clickable-images" bsStyle="sucess">
+              <img
+                height="50"
+                width="50"
+                src="https://emojipedia-us.s3.amazonaws.com/thumbs/120/apple/118/loudly-crying-face_1f62d.png"
+                onClick={this.props.setMood}
+                alt="image1"
+                id="1"
+              />
+              <div className="hvrbox-layer_top">
+                <div className="hvrbox-text">really sad</div>
+              </div>
+            </Button>
+          </div>
 
           <Button className="clickable-images" bsStyle="sucess">
             <img
