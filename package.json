@@ -6,6 +6,8 @@
     "BarGraph.js": "^2.7.2",
     "bootstrap": "^4.0.0",
     "chart.js": "^2.7.2",
+    "npm": "^6.1.0",
+    "npm-start-command": "^0.2.0",
     "react": "^16.2.0",
     "react-BarGraphjs-2": "^2.7.0",
     "react-bootstrap": "^0.32.1",

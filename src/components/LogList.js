@@ -1,18 +1,34 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Button } from "react-bootstrap";
-import { selectLog } from "../actions";
+import { selectLog, fetchLogs, logout } from "../actions";
 
 class LogList extends React.Component {
+  componentDidMount() {
+    console.log("component did mount", this.props.user);
+    if (this.props.user.id) {
+      this.props.fetchLogs(this.props.user.id);
+    }
+  }
   newEntryClick = event => {
     this.props.history.push("/logs/new");
   };
+
+  logOutClick = event => {
+    localStorage.clear();
+    this.props.logout();
+    this.props.history.push("/login");
+  };
   render() {
+    console.log("log list props", this.props);
+    if (!this.props.user.id) {
+      return <div>Loading</div>;
+    }
     return (
       <div className="log-list-container">
         <div>
           {" "}
-          <h2 className="log-list-header"> Your Diary Entries: </h2>
+          <h2 className="log-list-header"> Your Daily Entries: </h2>
         </div>
         <div>
           <img
@@ -23,6 +39,7 @@ class LogList extends React.Component {
             alt="image1"
           />
         </div>
+        <p />
         {this.props.logs.map(eachLog => {
           return (
             <div>
@@ -37,11 +54,21 @@ class LogList extends React.Component {
           );
         })}
         <div />
-        <button className="button-submit" onClick={this.newEntryClick}>
-          make a new entry
+        <button className="button-submit-entry" onClick={this.newEntryClick}>
+          Make a new entry
+        </button>
+        <div />
+        <button className="button-submit" onClick={this.logOutClick}>
+          Logout
         </button>
       </div>
     );
   }
 }
-export default connect(null, { selectLog })(LogList);
+
+const mapStateToProps = state => {
+  return { user: state.user, logs: state.logs };
+};
+export default connect(mapStateToProps, { selectLog, fetchLogs, logout })(
+  LogList
+);

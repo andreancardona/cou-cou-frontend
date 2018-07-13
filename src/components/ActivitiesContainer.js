@@ -11,29 +11,31 @@ class ActivitiesContainer extends React.Component {
       return <div />;
     }
     return (
-      <div>
-        <h2 className="welcome-header">What did you do today? </h2>
+      <div className="welcome-header">
+        <h2>What did you do today? </h2>
         {this.activitiesOptions}
         <p />
         {this.props.activities.map(activity => {
-          return activity.map(singleActivity => {
-            return (
-              <Button className="clickable-images" bsStyle="sucess">
-                <img
-                  height="50"
-                  width="50"
-                  src={singleActivity.url}
-                  alt={singleActivity.activity}
-                  id={singleActivity.id}
-                  onClick={this.props.activitiesClick}
-                />
-              </Button>
-            );
-          });
+          return (
+            <Button className="clickable-images" bsStyle="sucess">
+              <img
+                height="50"
+                width="50"
+                src={activity.url}
+                alt={activity.activity}
+                id={activity.id}
+                onClick={this.props.activitiesClick}
+              />
+            </Button>
+          );
         })}
         <form onSubmit={this.props.handleActivitiesSubmit}>
           <p />
-          <input className="button-submit" type="submit" value="submit" />
+          <input
+            className="button-submit-activities"
+            type="submit"
+            value="submit"
+          />{" "}
         </form>
       </div>
     );
@@ -41,6 +43,7 @@ class ActivitiesContainer extends React.Component {
 }
 
 const mapStateToProps = state => {
+  console.log("activities", state);
   return {
     activities: state.activities
   };
